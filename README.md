@@ -1,9 +1,15 @@
-Instructions for Ubuntu (you can adapt if you go with different OS)
+Instructions for 
+- t2.medium or larger instance
+- Ubuntu OS (you can adapt the instructions if you go with different OS)
+
+# Instructions
+
+## Measure Network Latency and Packets Loss metrics
 
 1. Install New Relic Infrastructure https://one.newrelic.com/launcher/nr1-core.settings?pane=eyJuZXJkbGV0SWQiOiJzZXR1cC1uZXJkbGV0LnNldHVwLW9zIiwiZGF0YVNvdXJjZSI6IlVCVU5UVSIsImFjY291bnRJZCI6MTM4NzM2OH0=
 
-2. Run Flex with ping to each telemetry endpoints to measure Network Latency and Packet Loss
-In the folder /etc/newrelic-infra/integrations.d/ create a file ping.xml with following content:
+2. Run Flex (easy way to build integrations just with configuration) with ping to each telemetry endpoints to measure Network Latency and Packet Loss
+To do so, create in the folder `/etc/newrelic-infra/integrations.d/` a file `ping.xml` with following content (you can just copy/paste):
 ```
 ---
 integrations:
@@ -94,6 +100,8 @@ integrations:
             url: log-api.newrelic.com
 ```
 
+## Measure Telemetry API Time To Glass with load (1,000 req/min)
+
 3. Install DOCKER
 
 ```
@@ -105,12 +113,19 @@ sudo apt update \
 && sudo apt install docker-ce -y 
 ```
 
-2. Install Doceker-Compose
+4. Install Docker-Compose
 ```
 sudo curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose \
 && sudo chmod +x /usr/local/bin/docker-compose 
 ```
 
-3. Update Dockerfile with the New Relic keys
+5. Clone the app
+```git clone https://github.com/edevregille/telemetry-latency && cd telemetry-latency```
 
-4. Run sudo docker-compose up -d --scale web=5
+6. Update Dockerfile with the New Relic keys for your New Relic account (license key, accountId, Insights Query and Insert keys)
+
+7. Run the application and generate traffic. Ensure everything is working fine and resources are all good.
+```sudo docker-compose up -d --scale web=8```  
+
+You can then scale up to get to 1,000 req/min by running 
+```sudo docker-compose up -d --scale web=17```

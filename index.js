@@ -8,7 +8,7 @@ const {publishEvent, publishMetric, publishLog, publishTrace} = require('./utils
 const measureLatency= async ()=>{
     const insert_id = uuid.v1()
     let results = await Promise.all([publishMetric(insert_id), publishLog(insert_id), publishEvent(insert_id), publishTrace(insert_id)])
-    newrelic.recordCustomEvent('TelemetryTimeToGlassChina', {
+    newrelic.recordCustomEvent('TelemetryTimeToGlass', {
         "metricTimeToGlass": (results && results[0] && results[0].endTimeMs && results[0].startTimeMs && results[0].endTimeMs > 0) ? results[0].endTimeMs - results[0].startTimeMs: null,
         "logTimeToGlass": (results && results[1] && results[1].endTimeMs && results[1].startTimeMs && results[1].endTimeMs > 0) ? results[1].endTimeMs - results[1].startTimeMs: null,
         "eventTimeToGlass": (results && results[2] && results[2].endTimeMs && results[2].startTimeMs && results[2].endTimeMs > 0) ? results[2].endTimeMs - results[2].startTimeMs: null,
