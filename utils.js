@@ -11,7 +11,8 @@ const TELEMETRY_TRACE_API = 'https://trace-api.newrelic.com/trace/v1'
 //------------------------------------------------------------------------------
 const QUERY_URL = `https://insights-api.newrelic.com/v1/accounts/${ACCOUNT_ID}/query?nrql=`
 //------------------------------------------------------------------------------
-const WAIT_TIME = 200
+const WAIT_TIME = 300
+const MAX_RETRIES =35
 
 /***** PUBLISH TELEMETRY */
 
@@ -129,7 +130,7 @@ exports.publishEvent = async (insert_id) =>{
 const queryEventFunction = async (insert_id) => {
     let retries = 0, endTimeMs =-1, endloop =false
     await new Promise(resolve => setTimeout(resolve, WAIT_TIME));
-    while(retries <=30 && endloop == false){
+    while(retries <=MAX_RETRIES && endloop == false){
         await new Promise(resolve => setTimeout(resolve, WAIT_TIME));
         let response = await axios({
             method:"GET",
@@ -150,7 +151,7 @@ const queryEventFunction = async (insert_id) => {
 const queryLogFunction = async(insert_id) => {
     let retries = 0, endTimeMs =-1, endloop =false
     await new Promise(resolve => setTimeout(resolve, WAIT_TIME));
-    while(retries <=30 && endloop == false){
+    while(retries <=MAX_RETRIES && endloop == false){
         await new Promise(resolve => setTimeout(resolve, WAIT_TIME));
         let response = await axios({
             method:"GET",
@@ -170,7 +171,7 @@ const queryLogFunction = async(insert_id) => {
   const queryMetricFunction = async (insert_id) =>{
     let retries = 0, endTimeMs =-1, endloop =false
     await new Promise(resolve => setTimeout(resolve, WAIT_TIME));
-    while(retries <=30 && endloop == false){
+    while(retries <=MAX_RETRIES && endloop == false){
         await new Promise(resolve => setTimeout(resolve, WAIT_TIME));
         let response = await axios({
             method:"GET",
@@ -190,7 +191,7 @@ const queryLogFunction = async(insert_id) => {
   const queryTraceFunction = async (insert_id)=> {
     let retries = 0, endTimeMs =-1, endloop =false
     await new Promise(resolve => setTimeout(resolve, WAIT_TIME));
-    while(retries <=30 && endloop == false){
+    while(retries <=MAX_RETRIES && endloop == false){
         await new Promise(resolve => setTimeout(resolve, WAIT_TIME));
         let response = await axios({
             method:"GET",
