@@ -12,7 +12,7 @@ const TELEMETRY_TRACE_API = 'https://trace-api.newrelic.com/trace/v1'
 const QUERY_URL = `https://insights-api.newrelic.com/v1/accounts/${ACCOUNT_ID}/query?nrql=`
 //------------------------------------------------------------------------------
 const WAIT_TIME = 300
-const MAX_RETRIES =35
+const MAX_RETRIES =30
 
 /***** PUBLISH TELEMETRY */
 

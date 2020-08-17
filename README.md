@@ -1,5 +1,5 @@
 Instructions for 
-- t2.medium or larger instance
+- m5a.large or similar or larger instance
 - Ubuntu OS (you can adapt the instructions if you go with different OS)
 
 # Instructions
