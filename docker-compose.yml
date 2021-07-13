@@ -1,4 +1,20 @@
 version: '3'
 services:
-  web:
-    build: .
+  agent:
+    container_name: newrelic-infra
+    build:
+      context: ./newrelic-infra-setup
+      dockerfile: newrelic-infra.dockerfile
+    cap_add:
+      - SYS_PTRACE
+    network_mode: host
+    pid: host
+    privileged: true
+    volumes:
+      - "/:/host:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    restart: unless-stopped
+  telemetry:
+    build: 
+      context: ./telemetry-api
+      dockerfile: telemetry-api.dockerfile

@@ -1,3 +1,2 @@
-Dockerfile-test
-node_modules
-package-lock.json
+./telemetry-api/node_modules
+./telemetry-api/package-lock.json
