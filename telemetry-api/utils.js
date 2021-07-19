@@ -9,7 +9,7 @@ const TELEMETRY_LOG_API = 'https://log-api.newrelic.com/log/v1';
 const TELEMETRY_METRIC_API = 'https://metric-api.newrelic.com/metric/v1';
 const TELEMETRY_TRACE_API = 'https://trace-api.newrelic.com/trace/v1';
 //------------------------------------------------------------------------------
-const WAIT_TIME = 300;
+const WAIT_TIME = 50;
 const MAX_RETRIES =30;
 
 /***** PUBLISH TELEMETRY */

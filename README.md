@@ -36,7 +36,6 @@ sudo curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-c
 5. Update the New Relic Infrastructure yaml `newrelic-infra-setup/newrelic-infra.yml` file with your license key.
 
 6. Run the application and generate traffic. Ensure everything is working fine and resources are all good.
-```sudo docker-compose up -d --scale telemetry=8```  
+```sudo docker-compose up -d --scale telemetry=3```  
 
-You can then scale up to get to 1,000 req/min by running 
-```sudo docker-compose up -d --scale telemetry=17```
+![alt text](https://github.com/edevregille/telemetry-latency/blob/master/expected_results.png?raw=true)
